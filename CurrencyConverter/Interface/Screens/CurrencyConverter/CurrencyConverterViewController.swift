@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CurrencyConverterViewController.swift
 //  CurrencyConverter
 //
 //  Created by Semen Tolkachov on 27/03/2025.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CurrencyConverterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
