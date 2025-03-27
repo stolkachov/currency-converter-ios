@@ -12,7 +12,7 @@ final class RatesApiServiceMock: RatesApiServiceProtocol {
     private(set) var fetchRateFromAmount: Double!
     private(set) var fetchRateFromCurrency: String!
     private(set) var fetchRateToCurrency: String!
-    private(set) var fetchRateCompletion: (Result<MoneyDto, Error>)?
+    var fetchRateCompletion: (Result<MoneyDto, Error>)?
 
     func fetchRate(
         fromAmount: Double,

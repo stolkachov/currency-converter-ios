@@ -5,7 +5,7 @@
 //  Created by Semen Tolkachov on 27/03/2025.
 //
 
-struct Money {
+struct Money: Equatable {
     let amount: Double
     let currency: String
 }
