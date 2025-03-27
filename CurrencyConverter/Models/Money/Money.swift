@@ -6,6 +6,6 @@
 //
 
 struct Money: Equatable {
-    let amount: Double
+    let amount: String
     let currency: String
 }

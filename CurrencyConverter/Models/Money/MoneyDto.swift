@@ -6,7 +6,7 @@
 //
 
 struct MoneyDto: Codable {
-    let amount: Double
+    let amount: String
     let currency: String
 }
 

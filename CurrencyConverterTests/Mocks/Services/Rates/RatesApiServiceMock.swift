@@ -8,7 +8,6 @@
 @testable import CurrencyConverter
 
 final class RatesApiServiceMock: RatesApiServiceProtocol {
-    private(set) var fetchRateCalled = false
     private(set) var fetchRateFromAmount: Double!
     private(set) var fetchRateFromCurrency: String!
     private(set) var fetchRateToCurrency: String!
@@ -20,7 +19,6 @@ final class RatesApiServiceMock: RatesApiServiceProtocol {
         toCurrency: String,
         completion: @escaping (Result<MoneyDto, Error>) -> Void
     ) {
-        fetchRateCalled = true
         fetchRateFromAmount = fromAmount
         fetchRateFromCurrency = fromCurrency
         fetchRateToCurrency = toCurrency
