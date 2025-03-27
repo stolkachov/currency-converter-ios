@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		986AC8482D95303200CE82A4 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 986AC8472D95303200CE82A4 /* Alamofire */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		986AC80F2D95253500CE82A4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				986AC8482D95303200CE82A4 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = CurrencyConverter;
 			packageProductDependencies = (
+				986AC8472D95303200CE82A4 /* Alamofire */,
 			);
 			productName = CurrencyConverter;
 			productReference = 986AC7FD2D95253300CE82A4 /* CurrencyConverter.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = 986AC7F42D95253300CE82A4;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				986AC8462D95303200CE82A4 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 986AC7FE2D95253300CE82A4 /* Products */;
 			projectDirPath = "";
@@ -583,6 +592,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		986AC8462D95303200CE82A4 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		986AC8472D95303200CE82A4 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 986AC8462D95303200CE82A4 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 986AC7F52D95253300CE82A4 /* Project object */;
 }
