@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		986AC8482D95303200CE82A4 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 986AC8472D95303200CE82A4 /* Alamofire */; };
+		986AC8C42D954CD700CE82A4 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 986AC8C32D954CD700CE82A4 /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,9 +33,22 @@
 		986AC8182D95253500CE82A4 /* CurrencyConverterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CurrencyConverterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		986AC9122D9556D800CE82A4 /* Exceptions for "CurrencyConverter" folder in "CurrencyConverter" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 986AC7FC2D95253300CE82A4 /* CurrencyConverter */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		986AC7FF2D95253300CE82A4 /* CurrencyConverter */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				986AC9122D9556D800CE82A4 /* Exceptions for "CurrencyConverter" folder in "CurrencyConverter" target */,
+			);
 			path = CurrencyConverter;
 			sourceTree = "<group>";
 		};
@@ -56,7 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				986AC8482D95303200CE82A4 /* Alamofire in Frameworks */,
+				986AC8C42D954CD700CE82A4 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,7 +130,7 @@
 			);
 			name = CurrencyConverter;
 			packageProductDependencies = (
-				986AC8472D95303200CE82A4 /* Alamofire */,
+				986AC8C32D954CD700CE82A4 /* Alamofire */,
 			);
 			productName = CurrencyConverter;
 			productReference = 986AC7FD2D95253300CE82A4 /* CurrencyConverter.app */;
@@ -202,7 +215,7 @@
 			mainGroup = 986AC7F42D95253300CE82A4;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				986AC8462D95303200CE82A4 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				986AC8C22D954CD700CE82A4 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 986AC7FE2D95253300CE82A4 /* Products */;
@@ -397,18 +410,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = CurrencyConverter/CurrencyConverter.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"CurrencyConverter/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_FILE = CurrencyConverter/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -434,18 +445,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = CurrencyConverter/CurrencyConverter.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"CurrencyConverter/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_FILE = CurrencyConverter/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -594,7 +603,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		986AC8462D95303200CE82A4 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		986AC8C22D954CD700CE82A4 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
@@ -605,9 +614,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		986AC8472D95303200CE82A4 /* Alamofire */ = {
+		986AC8C32D954CD700CE82A4 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 986AC8462D95303200CE82A4 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = 986AC8C22D954CD700CE82A4 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
