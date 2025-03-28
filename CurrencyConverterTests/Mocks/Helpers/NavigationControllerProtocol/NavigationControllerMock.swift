@@ -16,4 +16,18 @@ final class NavigationControllerMock: NavigationControllerProtocol {
         pushViewControllerViewController = viewController
         pushViewControllerAnimated = animated
     }
+
+    private(set) var presentViewControllerViewController: UIViewController!
+    private(set) var presentViewControllerAnimated: Bool!
+
+    func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
+        presentViewControllerViewController = viewControllerToPresent
+        presentViewControllerAnimated = flag
+    }
+
+    private(set) var dismissAnimated: Bool!
+
+    func dismiss(animated flag: Bool, completion: (() -> Void)?) {
+        dismissAnimated = flag
+    }
 }
