@@ -57,8 +57,7 @@ private extension NumbersPad.Model {
     }
 
     func makeDecimalSeparatorButton() -> Button {
-        let decimalSeparator = Locale.current.decimalSeparator ?? ","
-        return Button(
+        Button(
             text: decimalSeparator,
             action: { [weak self] in
                 self?.text.append(decimalSeparator)
