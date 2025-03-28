@@ -15,7 +15,8 @@ final class MainFlowScreenFactory: MainFlowScreenFactoryProtocol {
     func makeCurrencyConverterScreen() -> UIViewController {
         CurrencyConverterViewController(
             viewModel: CurrencyConverterViewModel(
-                currencyAmountInputFormatter: CurrencyAmountInputFormatter()
+                currencyAmountInputFormatter: CurrencyAmountInputFormatter(),
+                ratesInteractor: RatesInteractor()
             )
         )
     }

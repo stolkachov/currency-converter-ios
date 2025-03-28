@@ -47,17 +47,21 @@ final class CurrencyConverterViewModel {
         didSet {
             if isSellCurrencyViewSelected != oldValue {
                 reset()
+                ratesInteractor.stopRateUpdate()
                 onSelectedCurrencyViewChange?(isSellCurrencyViewSelected)
             }
         }
     }
 
     private let currencyAmountInputFormatter: CurrencyAmountInputFormatterProtocol
+    private let ratesInteractor: RatesInteractorProtocol
 
     init(
-        currencyAmountInputFormatter: CurrencyAmountInputFormatterProtocol
+        currencyAmountInputFormatter: CurrencyAmountInputFormatterProtocol,
+        ratesInteractor: RatesInteractorProtocol
     ) {
         self.currencyAmountInputFormatter = currencyAmountInputFormatter
+        self.ratesInteractor = ratesInteractor
     }
 
     func onViewDidLoad() {
@@ -82,14 +86,7 @@ private extension CurrencyConverterViewModel {
             self?.isSellCurrencyViewSelected = false
         }
         numbersPadModel.onTextDidChange = { [weak self] text in
-            guard let self else {
-                return
-            }
-            if self.isSellCurrencyViewSelected {
-                self.sellCurrencyModel.amountInputModel.text = currencyAmountInputFormatter.string(amount: "-\(text)", currencyCode: sellCurrency)
-            } else {
-                self.buyCurrencyModel.amountInputModel.text = currencyAmountInputFormatter.string(amount: text, currencyCode: buyCurrency)
-            }
+            self?.startRateUpdate(amount: text)
         }
     }
 }
@@ -97,6 +94,38 @@ private extension CurrencyConverterViewModel {
 private extension CurrencyConverterViewModel {
     func makeTitle() -> String {
         "Buy \(buyCurrency.rawValue)"
+    }
+}
+
+private extension CurrencyConverterViewModel {
+    func startRateUpdate(amount: String) {
+        if isSellCurrencyViewSelected {
+            sellCurrencyModel.amountInputModel.text = currencyAmountInputFormatter.string(amount: "-\(amount)", currencyCode: sellCurrency)
+        } else {
+            buyCurrencyModel.amountInputModel.text = currencyAmountInputFormatter.string(amount: amount, currencyCode: buyCurrency)
+        }
+        ratesInteractor.stopRateUpdate()
+        ratesInteractor.startRateUpdate(
+            fireAt: Date(),
+            fromAmount: currencyAmountInputFormatter.double(amount: amount),
+            fromCurrency: sellCurrency.rawValue,
+            toCurrency: buyCurrency.rawValue,
+            completion: { [weak self] result in
+                guard let self else {
+                    return
+                }
+                switch result {
+                case let .success(money):
+                    if self.isSellCurrencyViewSelected {
+                        self.buyCurrencyModel.amountInputModel.text = self.currencyAmountInputFormatter.string(amount: money.amount, currencyCode: self.buyCurrency)
+                    } else {
+                        self.sellCurrencyModel.amountInputModel.text = self.currencyAmountInputFormatter.string(amount: "-\(money.amount)", currencyCode: self.sellCurrency)
+                    }
+                case let .failure(error):
+                    print(error)
+                }
+            }
+        )
     }
 }
 
