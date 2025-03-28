@@ -18,6 +18,12 @@ final class NumbersPad: UIView {
         return stackView
     }()
 
+    private let impactFeedbackGenerator: UIImpactFeedbackGenerator = {
+        let impactFeedbackGenerator = UIImpactFeedbackGenerator()
+        impactFeedbackGenerator.prepare()
+        return impactFeedbackGenerator
+    }()
+
     init(model: Model) {
         super.init(frame: .zero)
         setupViews()
@@ -37,7 +43,10 @@ private extension NumbersPad {
             let singleRowStackView = makeSingleRowStackView()
 
             row.forEach({ button in
-                let button = NumbersPadButton(model: button)
+                let button = NumbersPadButton(
+                    model: button,
+                    impactFeedbackGenerator: impactFeedbackGenerator
+                )
                 singleRowStackView.addArrangedSubview(button)
             })
 

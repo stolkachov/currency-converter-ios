@@ -15,7 +15,7 @@ final class NumbersPadButton: UIButton {
         return background
     }()
 
-    private let impactFeedbackGenerator = UIImpactFeedbackGenerator()
+    private let impactFeedbackGenerator: UIImpactFeedbackGenerator
 
     override var isHighlighted: Bool {
         didSet {
@@ -29,7 +29,11 @@ final class NumbersPadButton: UIButton {
         return CGSize(width: 104, height: 104)
     }
 
-    init(model: NumbersPad.Model.Button) {
+    init(
+        model: NumbersPad.Model.Button,
+        impactFeedbackGenerator: UIImpactFeedbackGenerator
+    ) {
+        self.impactFeedbackGenerator = impactFeedbackGenerator
         super.init(frame: .zero)
         setupView()
         updateAppearance()
