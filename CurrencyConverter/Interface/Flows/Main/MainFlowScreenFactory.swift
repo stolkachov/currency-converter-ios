@@ -13,6 +13,10 @@ protocol MainFlowScreenFactoryProtocol {
 
 final class MainFlowScreenFactory: MainFlowScreenFactoryProtocol {
     func makeCurrencyConverterScreen() -> UIViewController {
-        return CurrencyConverterViewController()
+        CurrencyConverterViewController(
+            viewModel: CurrencyConverterViewModel(
+                currencyAmountInputFormatter: CurrencyAmountInputFormatter()
+            )
+        )
     }
 }
