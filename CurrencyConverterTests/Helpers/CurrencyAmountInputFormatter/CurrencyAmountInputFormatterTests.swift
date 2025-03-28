@@ -23,6 +23,24 @@ final class CurrencyAmountInputFormatterTests: XCTestCase {
         sut = CurrencyAmountInputFormatter()
     }
 
+    func test_double_emptyAmount() {
+        let result = sut.double(amount: "")
+
+        XCTAssertEqual(result, 0)
+    }
+
+    func test_double_amountOnlyMinusSymbol() {
+        let result = sut.double(amount: "-")
+
+        XCTAssertEqual(result, 0)
+    }
+
+    func test_double_amountWithCommaDecimalSeparator() {
+        let result = sut.double(amount: "14,55")
+
+        XCTAssertEqual(result, 14.55)
+    }
+
     func test_string_emptyAmount() {
         let result = sut.string(amount: "", currencyCode: .EUR)
 

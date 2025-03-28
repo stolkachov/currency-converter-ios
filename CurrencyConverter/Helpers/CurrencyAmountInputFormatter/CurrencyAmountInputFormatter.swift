@@ -8,6 +8,7 @@
 import Foundation
 
 protocol CurrencyAmountInputFormatterProtocol {
+    func double(amount: String) -> Double
     func string(amount: String, currencyCode: CurrencyCode) -> String
 }
 
@@ -20,22 +21,27 @@ final class CurrencyAmountInputFormatter: CurrencyAmountInputFormatterProtocol {
         return formatter
     }()
 
-    func string(amount: String, currencyCode: CurrencyCode) -> String {
-        let formattedAmount: Double = if amount.isEmpty || amount == "-" {
-            0
+    func double(amount: String) -> Double {
+        if amount.isEmpty || amount == "-" {
+            return 0
         } else {
-            Double(amount.replacingOccurrences(of: Locale.current.decimalSeparator ?? ",", with: ".")) ?? 0
+            let formattedAmount = amount.replacingOccurrences(of: decimalSeparator, with: ".")
+            return Double(formattedAmount) ?? 0
         }
+    }
+
+    func string(amount: String, currencyCode: CurrencyCode) -> String {
+        let amountDouble = double(amount: amount)
 
         numberFormatter.currencyCode = currencyCode.rawValue
         numberFormatter.negativePrefix = "-" + numberFormatter.currencySymbol
 
-        if formattedAmount == 0 {
+        if amountDouble == 0 {
             numberFormatter.positivePrefix = numberFormatter.currencySymbol
         } else {
             numberFormatter.positivePrefix = "+" + numberFormatter.currencySymbol
         }
 
-        return numberFormatter.string(from: NSNumber(floatLiteral: formattedAmount)) ?? ""
+        return numberFormatter.string(from: NSNumber(floatLiteral: amountDouble)) ?? ""
     }
 }
