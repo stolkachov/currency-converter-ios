@@ -14,11 +14,13 @@ extension NumbersPad {
             let action: () -> Void
         }
 
-        var onTextDidChange: (String) -> Void = { _ in }
+        var onTextDidChange: ((String) -> Void)?
 
-        private(set) var text: String = "" {
+        var text: String = "" {
             didSet {
-                onTextDidChange(text)
+                if text != oldValue {
+                    onTextDidChange?(text)
+                }
             }
         }
 
