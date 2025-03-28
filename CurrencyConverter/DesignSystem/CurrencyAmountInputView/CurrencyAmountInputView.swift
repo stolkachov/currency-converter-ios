@@ -81,8 +81,10 @@ private extension CurrencyAmountInputView {
 private extension CurrencyAmountInputView {
     func updateSelectionState() {
         if isSelected {
+            amountLabel.alpha = 1
             startCaretAnimation()
         } else {
+            amountLabel.alpha = 0.5
             stopCaretAnimation()
         }
     }
