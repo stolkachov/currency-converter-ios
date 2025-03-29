@@ -8,25 +8,27 @@
 import UIKit
 
 final class CurrencyHeaderTitle: UIControl {
-    private lazy var headerLabel: UILabel = {
+    private let currencyFlagImageView = CurrencyFlagImageView()
+
+    private let headerLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .body)
+        label.font = UIFont.preferredFont(forTextStyle: .subheadline)
         label.textColor = .systemGray
         label.isUserInteractionEnabled = false
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    private lazy var titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        label.font = UIFont.preferredFont(forTextStyle: .title1)
         label.textColor = .label
         label.isUserInteractionEnabled = false
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    private lazy var titleIcon: UIImageView = {
+    private let titleImageView: UIImageView = {
         let image = UIImage(systemName: "chevron.down", withConfiguration: UIImage.SymbolConfiguration(weight: .bold))
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFit
@@ -36,10 +38,10 @@ final class CurrencyHeaderTitle: UIControl {
         return imageView
     }()
 
-    private lazy var titleStackView: UIStackView = {
+    private let titleStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 4.0
+        stackView.spacing = 4
         stackView.distribution = .fillProportionally
         stackView.alignment = .fill
         stackView.isUserInteractionEnabled = false
@@ -47,10 +49,20 @@ final class CurrencyHeaderTitle: UIControl {
         return stackView
     }()
 
-    private lazy var headerTitleStackView: UIStackView = {
+    private let headerTitleStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .fill
+        stackView.isUserInteractionEnabled = false
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+
+    private let flagHeaderTitleStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.spacing = 16
         stackView.isUserInteractionEnabled = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -80,6 +92,7 @@ final class CurrencyHeaderTitle: UIControl {
 
 private extension CurrencyHeaderTitle {
     func update(model: Model) {
+        currencyFlagImageView.update(model: model.currencyFlagImageViewModel)
         headerLabel.text = model.header
         titleLabel.text = model.title
         model.onTitleDidChange = { [weak self] text in
@@ -98,8 +111,10 @@ private extension CurrencyHeaderTitle {
 private extension CurrencyHeaderTitle {
     func updateAppearance() {
         if isHighlighted {
+            currencyFlagImageView.alpha = 0.33
             titleStackView.alpha = 0.33
         } else {
+            currencyFlagImageView.alpha = 1
             titleStackView.alpha = 1.1
         }
     }
@@ -121,20 +136,25 @@ private extension CurrencyHeaderTitle {
     func setupView() {
         translatesAutoresizingMaskIntoConstraints = false
 
-        addSubview(headerTitleStackView)
+        addSubview(flagHeaderTitleStackView)
+        flagHeaderTitleStackView.addArrangedSubview(currencyFlagImageView)
+        flagHeaderTitleStackView.addArrangedSubview(headerTitleStackView)
         headerTitleStackView.addArrangedSubview(headerLabel)
         headerTitleStackView.addArrangedSubview(titleStackView)
         titleStackView.addArrangedSubview(titleLabel)
-        titleStackView.addArrangedSubview(titleIcon)
+        titleStackView.addArrangedSubview(titleImageView)
     }
 
     func setupConstraints() {
         NSLayoutConstraint.activate(
             [
-                headerTitleStackView.topAnchor.constraint(equalTo: topAnchor),
-                headerTitleStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-                headerTitleStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-                headerTitleStackView.bottomAnchor.constraint(equalTo: bottomAnchor)
+                currencyFlagImageView.heightAnchor.constraint(equalToConstant: 40),
+                currencyFlagImageView.widthAnchor.constraint(equalToConstant: 40),
+
+                flagHeaderTitleStackView.topAnchor.constraint(equalTo: topAnchor),
+                flagHeaderTitleStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                flagHeaderTitleStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+                flagHeaderTitleStackView.bottomAnchor.constraint(equalTo: bottomAnchor)
             ]
         )
     }

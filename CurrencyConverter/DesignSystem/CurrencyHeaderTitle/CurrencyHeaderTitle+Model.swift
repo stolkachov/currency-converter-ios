@@ -5,8 +5,11 @@
 //  Created by Semen Tolkachov on 28/03/2025.
 //
 
+import UIKit
+
 extension CurrencyHeaderTitle {
     final class Model {
+        let currencyFlagImageViewModel: CurrencyFlagImageView.Model
         let header: String
         var title: String {
             didSet {
@@ -21,10 +24,11 @@ extension CurrencyHeaderTitle {
 
         init(
             header: String,
-            title: String
+            currencyCode: CurrencyCode
         ) {
+            self.currencyFlagImageViewModel = CurrencyFlagImageView.Model(currencyCode: currencyCode)
             self.header = header
-            self.title = title
+            self.title = currencyCode.rawValue
         }
     }
 }

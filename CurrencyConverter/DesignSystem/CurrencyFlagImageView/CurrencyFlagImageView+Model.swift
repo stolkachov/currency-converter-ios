@@ -9,9 +9,21 @@ import UIKit
 
 extension CurrencyFlagImageView {
     final class Model {
-        let flag: UIImage?
+        var onFlagDidChange: ((UIImage?) -> Void)?
+
+        var flag: UIImage? {
+            didSet {
+                if flag != oldValue {
+                    onFlagDidChange?(flag)
+                }
+            }
+        }
 
         init(currencyCode: CurrencyCode) {
+            self.flag = UIImage(named: currencyCode.rawValue.lowercased())
+        }
+
+        func update(currencyCode: CurrencyCode) {
             self.flag = UIImage(named: currencyCode.rawValue.lowercased())
         }
     }

@@ -21,7 +21,7 @@ final class CurrencyConverterViewModel {
     private(set) lazy var sellCurrencyModel = TradeCurrencyView.Model(
         headerTitleModel: CurrencyHeaderTitle.Model(
             header: "Sell",
-            title: sellCurrency.rawValue
+            currencyCode: sellCurrency
         ),
         amountInputModel: CurrencyAmountInputView.Model(
             text: currencyAmountInputFormatter.string(amount: "0", currencyCode: sellCurrency),
@@ -31,7 +31,7 @@ final class CurrencyConverterViewModel {
     private(set) lazy var buyCurrencyModel = TradeCurrencyView.Model(
         headerTitleModel: CurrencyHeaderTitle.Model(
             header: "Buy",
-            title: buyCurrency.rawValue
+            currencyCode: buyCurrency
         ),
         amountInputModel: CurrencyAmountInputView.Model(
             text: currencyAmountInputFormatter.string(amount: "0", currencyCode: buyCurrency),
@@ -45,6 +45,7 @@ final class CurrencyConverterViewModel {
             if sellCurrency != oldValue {
                 reset()
                 ratesInteractor.stopRateUpdate()
+                sellCurrencyModel.headerTitleModel.currencyFlagImageViewModel.update(currencyCode: sellCurrency)
                 sellCurrencyModel.headerTitleModel.title = sellCurrency.rawValue
             }
         }
@@ -55,6 +56,7 @@ final class CurrencyConverterViewModel {
                 title = makeTitle()
                 reset()
                 ratesInteractor.stopRateUpdate()
+                buyCurrencyModel.headerTitleModel.currencyFlagImageViewModel.update(currencyCode: buyCurrency)
                 buyCurrencyModel.headerTitleModel.title = buyCurrency.rawValue
             }
         }

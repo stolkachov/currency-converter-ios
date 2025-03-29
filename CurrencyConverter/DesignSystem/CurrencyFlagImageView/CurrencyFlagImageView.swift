@@ -30,5 +30,8 @@ final class CurrencyFlagImageView: UIImageView {
 
     func update(model: Model) {
         image = model.flag
+        model.onFlagDidChange = { [weak self] flag in
+            self?.image = flag
+        }
     }
 }
