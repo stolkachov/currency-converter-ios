@@ -28,6 +28,7 @@ final class CurrencyHeaderTitle: UIControl {
         label.font = UIFont.preferredFont(forTextStyle: .title1)
         label.textColor = .white
         label.isUserInteractionEnabled = false
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -37,6 +38,7 @@ final class CurrencyHeaderTitle: UIControl {
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .white
+        imageView.setContentCompressionResistancePriority(.required, for: .horizontal)
         imageView.isUserInteractionEnabled = false
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -46,7 +48,6 @@ final class CurrencyHeaderTitle: UIControl {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.spacing = 4
-//        stack.distribution = .fillProportionally
         stack.alignment = .center
         stack.isUserInteractionEnabled = false
         stack.translatesAutoresizingMaskIntoConstraints = false
