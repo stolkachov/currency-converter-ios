@@ -25,7 +25,7 @@ final class CurrencyConverterViewModel {
         ),
         amountInputModel: CurrencyAmountInputView.Model(
             text: currencyAmountInputFormatter.string(amount: "0", currencyCode: sellCurrency),
-            textColor: .systemRed
+            textColor: .negative
         )
     )
     private(set) lazy var buyCurrencyModel = TradeCurrencyView.Model(
@@ -35,7 +35,7 @@ final class CurrencyConverterViewModel {
         ),
         amountInputModel: CurrencyAmountInputView.Model(
             text: currencyAmountInputFormatter.string(amount: "0", currencyCode: buyCurrency),
-            textColor: .systemGreen
+            textColor: .positive
         )
     )
     let numbersPadModel = NumbersPad.Model()
