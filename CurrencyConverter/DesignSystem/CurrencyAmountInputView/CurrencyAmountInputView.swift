@@ -17,6 +17,8 @@ final class CurrencyAmountInputView: UIControl {
         let label = UILabel()
         label.font = Constants.amountLabelFont
         label.textAlignment = .right
+        label.minimumScaleFactor = 0.5
+        label.adjustsFontSizeToFitWidth = true
         label.isUserInteractionEnabled = false
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
