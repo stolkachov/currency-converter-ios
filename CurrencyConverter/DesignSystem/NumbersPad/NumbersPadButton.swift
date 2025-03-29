@@ -70,11 +70,11 @@ private extension NumbersPadButton {
 private extension NumbersPadButton {
     func updateAppearance() {
         if isHighlighted {
-            backgroundView.backgroundColor = .systemGray
+            backgroundView.backgroundColor = .white
             backgroundView.alpha = 0.33
         } else {
-            backgroundView.backgroundColor = .systemGray
-            backgroundView.alpha = 0.1
+            backgroundView.backgroundColor = .white
+            backgroundView.alpha = 0.05
         }
     }
 
@@ -96,6 +96,6 @@ private extension NumbersPadButton {
         addSubview(backgroundView)
 
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .extraLargeTitle)
-        setTitleColor(.label, for: .normal)
+        setTitleColor(.white, for: .normal)
     }
 }

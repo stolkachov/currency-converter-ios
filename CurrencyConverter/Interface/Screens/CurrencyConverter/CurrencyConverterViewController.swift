@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CurrencyConverterViewController: UIViewController {
+final class CurrencyConverterViewController: UIViewController {
     private lazy var tradeCurrencyPairView: TradeCurrencyPairView = {
         let view = TradeCurrencyPairView(
             model: TradeCurrencyPairView.Model(
@@ -63,7 +63,13 @@ private extension CurrencyConverterViewController {
 
 private extension CurrencyConverterViewController {
     func setupSubviews() {
-        view.backgroundColor = .systemGroupedBackground
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = [UIColor.backgroundShallow.cgColor, UIColor.backgroundDeep.cgColor]
+        view.layer.insertSublayer(gradientLayer, at: 0)
+
         view.addSubview(tradeCurrencyPairView)
         view.addSubview(numbersPad)
     }

@@ -22,7 +22,7 @@ final class TradeCurrencyPairView: UIView {
 
     private lazy var separatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGray3
+        view.backgroundColor = .lightText
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

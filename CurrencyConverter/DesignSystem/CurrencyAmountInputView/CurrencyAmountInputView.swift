@@ -26,7 +26,7 @@ final class CurrencyAmountInputView: UIControl {
 
     private lazy var caretLayer: CALayer = {
         let layer = CALayer()
-        layer.backgroundColor = UIColor.systemGray.cgColor
+        layer.backgroundColor = UIColor.lightText.cgColor
         return layer
     }()
 

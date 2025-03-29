@@ -17,7 +17,7 @@ final class CurrencyHeaderTitle: UIControl {
     private lazy var headerLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        label.textColor = .systemGray
+        label.textColor = .lightText
         label.isUserInteractionEnabled = false
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -26,7 +26,7 @@ final class CurrencyHeaderTitle: UIControl {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .title1)
-        label.textColor = .label
+        label.textColor = .white
         label.isUserInteractionEnabled = false
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -36,7 +36,7 @@ final class CurrencyHeaderTitle: UIControl {
         let image = UIImage(systemName: "chevron.down", withConfiguration: UIImage.SymbolConfiguration(weight: .bold))
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .label
+        imageView.tintColor = .white
         imageView.isUserInteractionEnabled = false
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -46,8 +46,8 @@ final class CurrencyHeaderTitle: UIControl {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.spacing = 4
-        stack.distribution = .fillProportionally
-        stack.alignment = .fill
+//        stack.distribution = .fillProportionally
+        stack.alignment = .center
         stack.isUserInteractionEnabled = false
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
@@ -152,6 +152,9 @@ private extension CurrencyHeaderTitle {
             [
                 currencyFlagImageView.heightAnchor.constraint(equalToConstant: 40),
                 currencyFlagImageView.widthAnchor.constraint(equalToConstant: 40),
+
+                titleImageView.heightAnchor.constraint(equalToConstant: 18),
+                titleImageView.widthAnchor.constraint(equalToConstant: 18),
 
                 flagHeaderTitleStackView.topAnchor.constraint(equalTo: topAnchor),
                 flagHeaderTitleStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
