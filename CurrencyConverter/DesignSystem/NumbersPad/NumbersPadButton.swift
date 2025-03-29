@@ -55,7 +55,14 @@ final class NumbersPadButton: UIButton {
 
 private extension NumbersPadButton {
     func update(model: NumbersPad.Model.Button) {
-        setTitle(model.text, for: .normal)
+        switch model {
+        case let .text(text, _):
+            setTitle(text, for: .normal)
+            setImage(nil, for: .normal)
+        case let .image(image, _):
+            setTitle(nil, for: .normal)
+            setImage(image, for: .normal)
+        }
 
         let action = UIAction(
             handler: { [weak self] _ in
@@ -97,5 +104,6 @@ private extension NumbersPadButton {
 
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .extraLargeTitle)
         setTitleColor(.white, for: .normal)
+        tintColor = .white
     }
 }

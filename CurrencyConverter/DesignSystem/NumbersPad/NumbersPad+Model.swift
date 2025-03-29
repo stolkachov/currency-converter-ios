@@ -6,12 +6,22 @@
 //
 
 import Foundation
+import UIKit
 
 extension NumbersPad {
     final class Model {
-        struct Button {
-            let text: String
-            let action: () -> Void
+        enum Button {
+            case text(text: String, action: () -> Void)
+            case image(image: UIImage?, action: () -> Void)
+
+            var action: () -> Void {
+                switch self {
+                case let .text(_, action):
+                    return action
+                case let .image(_, action):
+                    return action
+                }
+            }
         }
 
         var onTextDidChange: ((String) -> Void)?
@@ -51,7 +61,7 @@ private extension NumbersPad.Model {
     }
 
     func makeDigitButton(digit: String) -> Button {
-        Button(
+        Button.text(
             text: digit,
             action: { [weak self] in
                 guard let self else {
@@ -66,7 +76,7 @@ private extension NumbersPad.Model {
     }
 
     func makeDecimalSeparatorButton() -> Button {
-        Button(
+        Button.text(
             text: decimalSeparator,
             action: { [weak self] in
                 guard let self else {
@@ -81,8 +91,8 @@ private extension NumbersPad.Model {
     }
 
     func makeDeleteButton() -> Button {
-        Button(
-            text: "<",
+        Button.image(
+            image: UIImage(systemName: "delete.backward", withConfiguration: UIImage.SymbolConfiguration(textStyle: .title1)),
             action: { [weak self] in
                 guard let self else {
                     return
