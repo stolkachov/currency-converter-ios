@@ -35,7 +35,24 @@ final class MainFlow {
 
 private extension MainFlow {
     func showCurrencyConverterScreen() {
-        let screen = screenFactory.makeCurrencyConverterScreen()
+        let screen = screenFactory.makeCurrencyConverterScreen(
+            onSellCurrencyHeaderTitleTap: showCurrenciesListScreen,
+            onBuyCurrencyHeaderTitleTap: showCurrenciesListScreen
+        )
         navigationController.pushViewController(screen, animated: false)
+    }
+
+    func showCurrenciesListScreen(
+        usedCurrencies: [CurrencyCode],
+        onNewCurrencySelect: @escaping (CurrencyCode) -> Void
+    ) {
+        let screen = screenFactory.makeCurrenciesListScreen(
+            currencies: CurrencyCode.allCases.filter({ !usedCurrencies.contains($0) }),
+            onCurrencySelect: { currency in
+                onNewCurrencySelect(currency)
+                self.navigationController.dismiss(animated: true)
+            }
+        )
+        navigationController.present(screen, animated: true)
     }
 }

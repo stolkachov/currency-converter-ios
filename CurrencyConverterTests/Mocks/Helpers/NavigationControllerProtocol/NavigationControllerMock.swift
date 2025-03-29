@@ -25,9 +25,11 @@ final class NavigationControllerMock: NavigationControllerProtocol {
         presentViewControllerAnimated = flag
     }
 
+    private(set) var dismissCallsCount = 0
     private(set) var dismissAnimated: Bool!
 
     func dismiss(animated flag: Bool, completion: (() -> Void)?) {
+        dismissCallsCount += 1
         dismissAnimated = flag
     }
 }

@@ -40,8 +40,25 @@ final class CurrencyConverterViewModel {
     )
     let numbersPadModel = NumbersPad.Model()
 
-    private var sellCurrency: CurrencyCode = .EUR
-    private var buyCurrency: CurrencyCode = .USD
+    private var sellCurrency: CurrencyCode = .EUR {
+        didSet {
+            if sellCurrency != oldValue {
+                reset()
+                ratesInteractor.stopRateUpdate()
+                sellCurrencyModel.headerTitleModel.title = sellCurrency.rawValue
+            }
+        }
+    }
+    private var buyCurrency: CurrencyCode = .USD {
+        didSet {
+            if buyCurrency != oldValue {
+                title = makeTitle()
+                reset()
+                ratesInteractor.stopRateUpdate()
+                buyCurrencyModel.headerTitleModel.title = buyCurrency.rawValue
+            }
+        }
+    }
 
     private var isSellCurrencyViewSelected: Bool = true {
         didSet {
@@ -56,12 +73,31 @@ final class CurrencyConverterViewModel {
     private let currencyAmountInputFormatter: CurrencyAmountInputFormatterProtocol
     private let ratesInteractor: RatesInteractorProtocol
 
+    private let onSellCurrencyHeaderTitleTap: (
+        _ usedCurrencies: [CurrencyCode],
+        _ onNewSellCurrencySelect: @escaping (CurrencyCode) -> Void
+    ) -> Void
+    private let onBuyCurrencyHeaderTitleTap: (
+        _ usedCurrencies: [CurrencyCode],
+        _ onNewBuyCurrencySelect: @escaping (CurrencyCode) -> Void
+    ) -> Void
+
     init(
         currencyAmountInputFormatter: CurrencyAmountInputFormatterProtocol,
-        ratesInteractor: RatesInteractorProtocol
+        ratesInteractor: RatesInteractorProtocol,
+        onSellCurrencyHeaderTitleTap: @escaping (
+            _ usedCurrencies: [CurrencyCode],
+            _ onNewSellCurrencySelect: @escaping (CurrencyCode) -> Void
+        ) -> Void,
+        onBuyCurrencyHeaderTitleTap: @escaping (
+            _ usedCurrencies: [CurrencyCode],
+            _ onNewBuyCurrencySelect: @escaping (CurrencyCode) -> Void
+        ) -> Void
     ) {
         self.currencyAmountInputFormatter = currencyAmountInputFormatter
         self.ratesInteractor = ratesInteractor
+        self.onSellCurrencyHeaderTitleTap = onSellCurrencyHeaderTitleTap
+        self.onBuyCurrencyHeaderTitleTap = onBuyCurrencyHeaderTitleTap
     }
 
     func onViewDidLoad() {
@@ -73,14 +109,30 @@ final class CurrencyConverterViewModel {
 
 private extension CurrencyConverterViewModel {
     func bind() {
-        sellCurrencyModel.headerTitleModel.onTap = {
-            print("SELL - TITLE")
+        sellCurrencyModel.headerTitleModel.onTap = { [weak self] in
+            guard let self else {
+                return
+            }
+            self.onSellCurrencyHeaderTitleTap(
+                [self.sellCurrency, self.buyCurrency],
+                { newSellCurrency in
+                    self.sellCurrency = newSellCurrency
+                }
+            )
         }
         sellCurrencyModel.amountInputModel.onTap = { [weak self] in
             self?.isSellCurrencyViewSelected = true
         }
-        buyCurrencyModel.headerTitleModel.onTap = {
-            print("BUY - TITLE")
+        buyCurrencyModel.headerTitleModel.onTap = { [weak self] in
+            guard let self else {
+                return
+            }
+            self.onBuyCurrencyHeaderTitleTap(
+                [self.sellCurrency, self.buyCurrency],
+                { newBuyCurrency in
+                    self.buyCurrency = newBuyCurrency
+                }
+            )
         }
         buyCurrencyModel.amountInputModel.onTap = { [weak self] in
             self?.isSellCurrencyViewSelected = false
