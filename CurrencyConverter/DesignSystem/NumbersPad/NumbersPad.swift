@@ -9,13 +9,13 @@ import UIKit
 
 final class NumbersPad: UIView {
     private lazy var rowsStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 20.0
-        stackView.distribution = .fillEqually
-        stackView.alignment = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 20.0
+        stack.distribution = .fillEqually
+        stack.alignment = .fill
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
     }()
 
     private let impactFeedbackGenerator: UIImpactFeedbackGenerator = {
@@ -26,7 +26,7 @@ final class NumbersPad: UIView {
 
     init(model: Model) {
         super.init(frame: .zero)
-        setupViews()
+        setupSubviews()
         setupConstraints()
         makeButtonsStack(model: model)
     }
@@ -66,9 +66,7 @@ private extension NumbersPad {
 }
 
 private extension NumbersPad {
-    func setupViews() {
-        translatesAutoresizingMaskIntoConstraints = false
-
+    func setupSubviews() {
         addSubview(rowsStackView)
     }
 

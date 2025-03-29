@@ -8,9 +8,17 @@
 import UIKit
 
 final class TradeCurrencyView: UIControl {
-    private lazy var headerTitleView = CurrencyHeaderTitle(model: model.headerTitleModel)
+    private lazy var headerTitleView: CurrencyHeaderTitle = {
+        let view = CurrencyHeaderTitle(model: model.headerTitleModel)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
-    private lazy var currencyAmountInputView = CurrencyAmountInputView(model: model.amountInputModel)
+    private lazy var currencyAmountInputView: CurrencyAmountInputView = {
+        let view = CurrencyAmountInputView(model: model.amountInputModel)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     override var isSelected: Bool {
         get { currencyAmountInputView.isSelected }
@@ -22,7 +30,7 @@ final class TradeCurrencyView: UIControl {
     init(model: Model) {
         self.model = model
         super.init(frame: .zero)
-        setupView()
+        setupSubviews()
         setupConstraints()
     }
 
@@ -33,9 +41,7 @@ final class TradeCurrencyView: UIControl {
 }
 
 private extension TradeCurrencyView {
-    func setupView() {
-        translatesAutoresizingMaskIntoConstraints = false
-
+    func setupSubviews() {
         addSubview(headerTitleView)
         addSubview(currencyAmountInputView)
     }

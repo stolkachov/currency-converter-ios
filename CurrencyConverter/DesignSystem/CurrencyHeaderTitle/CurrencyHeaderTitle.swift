@@ -8,9 +8,13 @@
 import UIKit
 
 final class CurrencyHeaderTitle: UIControl {
-    private let currencyFlagImageView = CurrencyFlagImageView()
+    private lazy var currencyFlagImageView: CurrencyFlagImageView = {
+        let imageView = CurrencyFlagImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
 
-    private let headerLabel: UILabel = {
+    private lazy var headerLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .subheadline)
         label.textColor = .systemGray
@@ -19,7 +23,7 @@ final class CurrencyHeaderTitle: UIControl {
         return label
     }()
 
-    private let titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .title1)
         label.textColor = .label
@@ -28,7 +32,7 @@ final class CurrencyHeaderTitle: UIControl {
         return label
     }()
 
-    private let titleImageView: UIImageView = {
+    private lazy var titleImageView: UIImageView = {
         let image = UIImage(systemName: "chevron.down", withConfiguration: UIImage.SymbolConfiguration(weight: .bold))
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFit
@@ -38,34 +42,34 @@ final class CurrencyHeaderTitle: UIControl {
         return imageView
     }()
 
-    private let titleStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 4
-        stackView.distribution = .fillProportionally
-        stackView.alignment = .fill
-        stackView.isUserInteractionEnabled = false
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
+    private lazy var titleStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 4
+        stack.distribution = .fillProportionally
+        stack.alignment = .fill
+        stack.isUserInteractionEnabled = false
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
     }()
 
-    private let headerTitleStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .fill
-        stackView.isUserInteractionEnabled = false
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
+    private lazy var headerTitleStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.alignment = .fill
+        stack.isUserInteractionEnabled = false
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
     }()
 
-    private let flagHeaderTitleStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.alignment = .center
-        stackView.spacing = 16
-        stackView.isUserInteractionEnabled = false
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
+    private lazy var flagHeaderTitleStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.alignment = .center
+        stack.spacing = 16
+        stack.isUserInteractionEnabled = false
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
     }()
 
     override var isHighlighted: Bool {
@@ -78,7 +82,7 @@ final class CurrencyHeaderTitle: UIControl {
 
     init(model: Model) {
         super.init(frame: .zero)
-        setupView()
+        setupSubviews()
         setupConstraints()
         updateAppearance()
         update(model: model)
@@ -133,9 +137,7 @@ private extension CurrencyHeaderTitle {
 }
 
 private extension CurrencyHeaderTitle {
-    func setupView() {
-        translatesAutoresizingMaskIntoConstraints = false
-
+    func setupSubviews() {
         addSubview(flagHeaderTitleStackView)
         flagHeaderTitleStackView.addArrangedSubview(currencyFlagImageView)
         flagHeaderTitleStackView.addArrangedSubview(headerTitleStackView)

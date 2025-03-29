@@ -9,29 +9,31 @@ import UIKit
 
 final class TradeCurrencyPairView: UIView {
     private lazy var sellCurrencyView: TradeCurrencyView = {
-        let currencyView = TradeCurrencyView(model: model.sellCurrencyModel)
-        return currencyView
+        let view = TradeCurrencyView(model: model.sellCurrencyModel)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
 
     private lazy var buyCurrencyView: TradeCurrencyView = {
-        let currencyView = TradeCurrencyView(model: model.buyCurrencyModel)
-        return currencyView
+        let view = TradeCurrencyView(model: model.buyCurrencyModel)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
 
     private lazy var separatorView: UIView = {
-        let separatorView = UIView()
-        separatorView.backgroundColor = .systemGray3
-        separatorView.translatesAutoresizingMaskIntoConstraints = false
-        return separatorView
+        let view = UIView()
+        view.backgroundColor = .systemGray3
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
 
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 8.0
-        stackView.alignment = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 8.0
+        stack.alignment = .fill
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
     }()
 
     private let model: Model
@@ -39,7 +41,7 @@ final class TradeCurrencyPairView: UIView {
     init(model: Model) {
         self.model = model
         super.init(frame: .zero)
-        setupView()
+        setupSubviews()
         setupConstraints()
     }
 
@@ -60,9 +62,7 @@ final class TradeCurrencyPairView: UIView {
 }
 
 private extension TradeCurrencyPairView {
-    func setupView() {
-        translatesAutoresizingMaskIntoConstraints = false
-
+    func setupSubviews() {
         addSubview(stackView)
         stackView.addArrangedSubview(sellCurrencyView)
         stackView.addArrangedSubview(separatorView)

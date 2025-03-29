@@ -8,36 +8,43 @@
 import UIKit
 
 final class CurrenciesListCurrencyTableViewCell: UITableViewCell {
-    private let currencyFlagImageView = CurrencyFlagImageView()
+    private lazy var currencyFlagImageView: CurrencyFlagImageView = {
+        let view = CurrencyFlagImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
-    private let currencyCodeLabel: UILabel = {
+    private lazy var currencyCodeLabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
         label.font = UIFont.preferredFont(forTextStyle: .headline)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    private let currencyNameLabel: UILabel = {
+    private lazy var currencyNameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .secondaryLabel
         label.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    private let codeNameStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 4
-        return stackView
+    private lazy var codeNameStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 4
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
     }()
 
-    private let flagCodeNameStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.alignment = .center
-        stackView.spacing = 8
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
+    private lazy var flagCodeNameStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.alignment = .center
+        stack.spacing = 8
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

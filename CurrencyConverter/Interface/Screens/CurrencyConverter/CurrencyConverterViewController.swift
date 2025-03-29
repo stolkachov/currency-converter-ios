@@ -8,13 +8,22 @@
 import UIKit
 
 class CurrencyConverterViewController: UIViewController {
-    private lazy var tradeCurrencyPairView = TradeCurrencyPairView(
-        model: TradeCurrencyPairView.Model(
-            sellCurrencyModel: viewModel.sellCurrencyModel,
-            buyCurrencyModel: viewModel.buyCurrencyModel
+    private lazy var tradeCurrencyPairView: TradeCurrencyPairView = {
+        let view = TradeCurrencyPairView(
+            model: TradeCurrencyPairView.Model(
+                sellCurrencyModel: viewModel.sellCurrencyModel,
+                buyCurrencyModel: viewModel.buyCurrencyModel
+            )
         )
-    )
-    private lazy var numbersPad = NumbersPad(model: viewModel.numbersPadModel)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    private lazy var numbersPad: NumbersPad = {
+        let view = NumbersPad(model: viewModel.numbersPadModel)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     private let viewModel: CurrencyConverterViewModel
 
@@ -30,7 +39,7 @@ class CurrencyConverterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
+        setupSubviews()
         setupConstraints()
         bindViewModel()
         viewModel.onViewDidLoad()
@@ -53,7 +62,7 @@ private extension CurrencyConverterViewController {
 }
 
 private extension CurrencyConverterViewController {
-    func setupViews() {
+    func setupSubviews() {
         view.backgroundColor = .systemGroupedBackground
         view.addSubview(tradeCurrencyPairView)
         view.addSubview(numbersPad)

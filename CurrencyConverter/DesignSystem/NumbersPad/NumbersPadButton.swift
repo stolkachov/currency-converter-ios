@@ -9,10 +9,10 @@ import UIKit
 
 final class NumbersPadButton: UIButton {
     private lazy var backgroundView: UIView = {
-        let background = UIView()
-        background.isUserInteractionEnabled = false
-        background.translatesAutoresizingMaskIntoConstraints = false
-        return background
+        let view = UIView()
+        view.isUserInteractionEnabled = false
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
 
     private let impactFeedbackGenerator: UIImpactFeedbackGenerator
@@ -35,7 +35,7 @@ final class NumbersPadButton: UIButton {
     ) {
         self.impactFeedbackGenerator = impactFeedbackGenerator
         super.init(frame: .zero)
-        setupView()
+        setupSubviews()
         updateAppearance()
         update(model: model)
     }
@@ -92,9 +92,7 @@ private extension NumbersPadButton {
 }
 
 private extension NumbersPadButton {
-    func setupView() {
-        translatesAutoresizingMaskIntoConstraints = false
-
+    func setupSubviews() {
         addSubview(backgroundView)
 
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .extraLargeTitle)

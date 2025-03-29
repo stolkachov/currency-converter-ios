@@ -13,7 +13,7 @@ final class CurrencyAmountInputView: UIControl {
         static let amountLabelFont = UIFont.preferredFont(forTextStyle: .largeTitle)
     }
 
-    private let amountLabel: UILabel = {
+    private lazy var amountLabel: UILabel = {
         let label = UILabel()
         label.font = Constants.amountLabelFont
         label.textAlignment = .right
@@ -22,7 +22,7 @@ final class CurrencyAmountInputView: UIControl {
         return label
     }()
 
-    private let caretLayer: CALayer = {
+    private lazy var caretLayer: CALayer = {
         let layer = CALayer()
         layer.backgroundColor = UIColor.systemGray.cgColor
         return layer
@@ -38,7 +38,7 @@ final class CurrencyAmountInputView: UIControl {
 
     init(model: Model) {
         super.init(frame: .zero)
-        setupView()
+        setupSubviews()
         setupConstraints()
         updateSelectionState()
         update(model: model)
@@ -108,9 +108,7 @@ private extension CurrencyAmountInputView {
 }
 
 private extension CurrencyAmountInputView {
-    func setupView() {
-        translatesAutoresizingMaskIntoConstraints = false
-
+    func setupSubviews() {
         addSubview(amountLabel)
         amountLabel.layer.addSublayer(caretLayer)
     }
