@@ -73,6 +73,7 @@ final class CurrencyConverterViewModel {
     }
 
     private let currencyAmountInputFormatter: CurrencyAmountInputFormatterProtocol
+    private let debouncer: DebouncerProtocol
     private let ratesInteractor: RatesInteractorProtocol
 
     private let onSellCurrencyHeaderTitleTap: (
@@ -86,6 +87,7 @@ final class CurrencyConverterViewModel {
 
     init(
         currencyAmountInputFormatter: CurrencyAmountInputFormatterProtocol,
+        debouncer: DebouncerProtocol,
         ratesInteractor: RatesInteractorProtocol,
         onSellCurrencyHeaderTitleTap: @escaping (
             _ usedCurrencies: [CurrencyCode],
@@ -97,6 +99,7 @@ final class CurrencyConverterViewModel {
         ) -> Void
     ) {
         self.currencyAmountInputFormatter = currencyAmountInputFormatter
+        self.debouncer = debouncer
         self.ratesInteractor = ratesInteractor
         self.onSellCurrencyHeaderTitleTap = onSellCurrencyHeaderTitleTap
         self.onBuyCurrencyHeaderTitleTap = onBuyCurrencyHeaderTitleTap
@@ -170,27 +173,34 @@ private extension CurrencyConverterViewModel {
             buyCurrencyModel.amountInputModel.text = currencyAmountInputFormatter.string(amount: amount, currencyCode: buyCurrency)
         }
         ratesInteractor.stopRateUpdate()
-        ratesInteractor.startRateUpdate(
-            fireAt: Date(),
-            fromAmount: currencyAmountInputFormatter.double(amount: amount),
-            fromCurrency: sellCurrency.rawValue,
-            toCurrency: buyCurrency.rawValue,
-            completion: { [weak self] result in
-                guard let self else {
-                    return
-                }
-                switch result {
-                case let .success(money):
-                    if self.isSellCurrencyViewSelected {
-                        self.buyCurrencyModel.amountInputModel.text = self.currencyAmountInputFormatter.string(amount: money.amount, currencyCode: self.buyCurrency)
-                    } else {
-                        self.sellCurrencyModel.amountInputModel.text = self.currencyAmountInputFormatter.string(amount: "-\(money.amount)", currencyCode: self.sellCurrency)
-                    }
-                case let .failure(error):
-                    print(error)
-                }
+        debouncer.cancel()
+        debouncer.debounce(delay: .seconds(2), queue: .main) { [weak self] in
+            guard let self else {
+                return
             }
-        )
+            self.ratesInteractor.startRateUpdate(
+                fireAt: Date(),
+                fromAmount: self.currencyAmountInputFormatter.double(amount: amount),
+                fromCurrency: self.sellCurrency.rawValue,
+                toCurrency: self.buyCurrency.rawValue,
+                completion: { [weak self] result in
+                    guard let self else {
+                        return
+                    }
+                    switch result {
+                    case let .success(money):
+                        if self.isSellCurrencyViewSelected {
+                            self.buyCurrencyModel.amountInputModel.text = self.currencyAmountInputFormatter.string(amount: money.amount, currencyCode: self.buyCurrency)
+                        } else {
+                            self.sellCurrencyModel.amountInputModel.text = self.currencyAmountInputFormatter.string(amount: "-\(money.amount)", currencyCode: self.sellCurrency)
+                        }
+                    case let .failure(error):
+                        print(error)
+                    }
+                }
+            )
+        }
+
     }
 }
 

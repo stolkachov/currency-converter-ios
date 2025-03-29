@@ -39,6 +39,7 @@ final class MainFlowScreenFactory: MainFlowScreenFactoryProtocol {
         CurrencyConverterViewController(
             viewModel: CurrencyConverterViewModel(
                 currencyAmountInputFormatter: CurrencyAmountInputFormatter(),
+                debouncer: Debouncer(),
                 ratesInteractor: RatesInteractor(),
                 onSellCurrencyHeaderTitleTap: onSellCurrencyHeaderTitleTap,
                 onBuyCurrencyHeaderTitleTap: onBuyCurrencyHeaderTitleTap
