@@ -16,6 +16,9 @@ extension NumbersPad {
 
         var onTextDidChange: ((String) -> Void)?
 
+        var shouldAppendDecimalSeparator: (String) -> Bool = { _ in true }
+        var shouldAppendDigit: (String) -> Bool = { _ in true }
+
         var text: String = "" {
             didSet {
                 if text != oldValue {
@@ -51,7 +54,13 @@ private extension NumbersPad.Model {
         Button(
             text: digit,
             action: { [weak self] in
-                self?.text.append(digit)
+                guard let self else {
+                    return
+                }
+                guard self.shouldAppendDigit(self.text) else {
+                    return
+                }
+                self.text.append(digit)
             }
         )
     }
@@ -60,7 +69,13 @@ private extension NumbersPad.Model {
         Button(
             text: decimalSeparator,
             action: { [weak self] in
-                self?.text.append(decimalSeparator)
+                guard let self else {
+                    return
+                }
+                guard self.shouldAppendDecimalSeparator(self.text) else {
+                    return
+                }
+                self.text.append(decimalSeparator)
             }
         )
     }

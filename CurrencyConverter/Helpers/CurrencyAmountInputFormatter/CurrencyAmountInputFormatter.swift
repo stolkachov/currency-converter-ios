@@ -15,9 +15,7 @@ protocol CurrencyAmountInputFormatterProtocol {
 final class CurrencyAmountInputFormatter: CurrencyAmountInputFormatterProtocol {
     private lazy var numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
-        formatter.alwaysShowsDecimalSeparator = false
         formatter.numberStyle = .decimal
-        formatter.maximumFractionDigits = 2
         return formatter
     }()
 
