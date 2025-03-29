@@ -42,6 +42,7 @@ final class CurrencyAmountInputView: UIControl {
         super.init(frame: .zero)
         setupSubviews()
         setupConstraints()
+        subscribeForNotifications()
         updateSelectionState()
         update(model: model)
     }
@@ -49,6 +50,10 @@ final class CurrencyAmountInputView: UIControl {
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    deinit {
+        removeNotificationsSubscriptions()
     }
 
     override func layoutSubviews() {
@@ -84,6 +89,7 @@ private extension CurrencyAmountInputView {
     func updateSelectionState() {
         if isSelected {
             amountLabel.alpha = 1
+            stopCaretAnimation()
             startCaretAnimation()
         } else {
             amountLabel.alpha = 0.5
@@ -124,5 +130,22 @@ private extension CurrencyAmountInputView {
                 amountLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             ]
         )
+    }
+}
+
+private extension CurrencyAmountInputView {
+    func subscribeForNotifications() {
+        NotificationCenter.default.addObserver(
+            forName: UIApplication.willEnterForegroundNotification,
+            object: nil,
+            queue: .main,
+            using: { [weak self] _ in
+                self?.updateSelectionState()
+            }
+        )
+    }
+
+    func removeNotificationsSubscriptions() {
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
     }
 }
