@@ -71,7 +71,7 @@ private extension CurrencyConverterViewController {
     func setupConstraints() {
         NSLayoutConstraint.activate(
             [
-                tradeCurrencyPairView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+                tradeCurrencyPairView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 64),
                 tradeCurrencyPairView.leadingAnchor.constraint(equalTo: view.readableContentGuide.leadingAnchor, constant: 16),
                 tradeCurrencyPairView.trailingAnchor.constraint(equalTo: view.readableContentGuide.trailingAnchor, constant: -16),
                 tradeCurrencyPairView.bottomAnchor.constraint(lessThanOrEqualTo: numbersPad.topAnchor, constant: -24),
