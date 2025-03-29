@@ -51,7 +51,7 @@ private extension TradeCurrencyView {
             [
                 headerTitleView.topAnchor.constraint(equalTo: topAnchor),
                 headerTitleView.leadingAnchor.constraint(equalTo: leadingAnchor),
-                headerTitleView.trailingAnchor.constraint(equalTo: currencyAmountInputView.leadingAnchor),
+                headerTitleView.trailingAnchor.constraint(equalTo: currencyAmountInputView.leadingAnchor, constant: -8),
                 headerTitleView.bottomAnchor.constraint(equalTo: bottomAnchor),
 
                 currencyAmountInputView.topAnchor.constraint(equalTo: topAnchor),
