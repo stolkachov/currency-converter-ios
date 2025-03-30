@@ -37,7 +37,7 @@
 		986AC9122D9556D800CE82A4 /* Exceptions for "CurrencyConverter" folder in "CurrencyConverter" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				SupportingFiles/Info.plist,
 			);
 			target = 986AC7FC2D95253300CE82A4 /* CurrencyConverter */;
 		};
@@ -415,7 +415,7 @@
 				DEVELOPMENT_TEAM = 834938XSY5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CurrencyConverter/Info.plist;
+				INFOPLIST_FILE = CurrencyConverter/SupportingFiles/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
@@ -451,7 +451,7 @@
 				DEVELOPMENT_TEAM = 834938XSY5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CurrencyConverter/Info.plist;
+				INFOPLIST_FILE = CurrencyConverter/SupportingFiles/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
