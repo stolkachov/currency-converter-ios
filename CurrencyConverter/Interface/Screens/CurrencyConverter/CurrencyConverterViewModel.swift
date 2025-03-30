@@ -167,7 +167,7 @@ private extension CurrencyConverterViewModel {
         }
         ratesInteractor.stopRateUpdate()
         debouncer.cancel()
-        debouncer.debounce(delay: .seconds(1), queue: .main) { [weak self] in
+        debouncer.debounce() { [weak self] in
             guard let self else {
                 return
             }

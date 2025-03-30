@@ -8,14 +8,25 @@
 import Foundation
 
 protocol DebouncerProtocol {
-    func debounce(delay: DispatchTimeInterval, queue: DispatchQueue, action: @escaping () -> Void)
+    func debounce(action: @escaping () -> Void)
     func cancel()
 }
 
 final class Debouncer: DebouncerProtocol {
     private var currentWorkItem: DispatchWorkItem? = nil
 
-    func debounce(delay: DispatchTimeInterval, queue: DispatchQueue, action: @escaping () -> Void) {
+    private let delay: DispatchTimeInterval
+    private let queue: DispatchQueue
+
+    init(
+        delay: DispatchTimeInterval = .seconds(1),
+        queue: DispatchQueue = .main
+    ) {
+        self.delay = delay
+        self.queue = queue
+    }
+
+    func debounce(action: @escaping () -> Void) {
         currentWorkItem?.cancel()
         currentWorkItem = DispatchWorkItem { [weak self] in
             action()
