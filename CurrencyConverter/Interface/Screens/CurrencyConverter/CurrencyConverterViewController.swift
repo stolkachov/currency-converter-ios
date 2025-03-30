@@ -9,12 +9,7 @@ import UIKit
 
 final class CurrencyConverterViewController: UIViewController {
     private lazy var tradeCurrencyPairView: TradeCurrencyPairView = {
-        let view = TradeCurrencyPairView(
-            model: TradeCurrencyPairView.Model(
-                sellCurrencyModel: viewModel.sellCurrencyModel,
-                buyCurrencyModel: viewModel.buyCurrencyModel
-            )
-        )
+        let view = TradeCurrencyPairView(model: viewModel.tradeCurrencyPairModel)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

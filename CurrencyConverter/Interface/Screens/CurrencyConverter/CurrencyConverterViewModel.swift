@@ -18,6 +18,10 @@ final class CurrencyConverterViewModel {
             }
         }
     }
+    private(set) lazy var tradeCurrencyPairModel = TradeCurrencyPairView.Model(
+        sellCurrencyModel: sellCurrencyModel,
+        buyCurrencyModel: buyCurrencyModel
+    )
     private(set) lazy var sellCurrencyModel = TradeCurrencyView.Model(
         headerTitleModel: CurrencyHeaderTitle.Model(
             header: "Sell",
@@ -174,10 +178,13 @@ private extension CurrencyConverterViewModel {
         }
         ratesInteractor.stopRateUpdate()
         debouncer.cancel()
-        debouncer.debounce(delay: .seconds(2), queue: .main) { [weak self] in
+        debouncer.debounce(delay: .seconds(1), queue: .main) { [weak self] in
             guard let self else {
                 return
             }
+
+            self.sellCurrencyModel.threeDotsModel.isLoading = true
+            self.buyCurrencyModel.threeDotsModel.isLoading = true
             self.ratesInteractor.startRateUpdate(
                 fireAt: Date(),
                 fromAmount: self.currencyAmountInputFormatter.double(amount: amount),
@@ -187,6 +194,8 @@ private extension CurrencyConverterViewModel {
                     guard let self else {
                         return
                     }
+                    self.sellCurrencyModel.threeDotsModel.isLoading = false
+                    self.buyCurrencyModel.threeDotsModel.isLoading = false
                     switch result {
                     case let .success(money):
                         if self.isSellCurrencyViewSelected {

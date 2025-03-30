@@ -20,6 +20,12 @@ final class TradeCurrencyView: UIControl {
         return view
     }()
 
+    private lazy var threeDotsView: ThreeDotsView = {
+        let view = ThreeDotsView(model: model.threeDotsModel)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
     override var isSelected: Bool {
         get { currencyAmountInputView.isSelected }
         set { currencyAmountInputView.isSelected = newValue }
@@ -44,6 +50,7 @@ private extension TradeCurrencyView {
     func setupSubviews() {
         addSubview(headerTitleView)
         addSubview(currencyAmountInputView)
+        addSubview(threeDotsView)
     }
 
     func setupConstraints() {
@@ -56,7 +63,12 @@ private extension TradeCurrencyView {
 
                 currencyAmountInputView.topAnchor.constraint(equalTo: topAnchor),
                 currencyAmountInputView.trailingAnchor.constraint(equalTo: trailingAnchor),
-                currencyAmountInputView.bottomAnchor.constraint(equalTo: bottomAnchor),
+                currencyAmountInputView.bottomAnchor.constraint(equalTo: threeDotsView.topAnchor, constant: -4),
+
+                threeDotsView.trailingAnchor.constraint(equalTo: trailingAnchor),
+                threeDotsView.bottomAnchor.constraint(equalTo: bottomAnchor),
+                threeDotsView.heightAnchor.constraint(equalToConstant: 6),
+                threeDotsView.widthAnchor.constraint(equalToConstant: 26),
             ]
         )
     }
