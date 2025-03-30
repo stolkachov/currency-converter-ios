@@ -172,8 +172,7 @@ private extension CurrencyConverterViewModel {
                 return
             }
 
-            self.sellCurrencyModel.threeDotsModel.isLoading = true
-            self.buyCurrencyModel.threeDotsModel.isLoading = true
+            self.startLoadingAnimation()
             self.ratesInteractor.startRateUpdate(
                 fireAt: Date(),
                 fromAmount: self.currencyAmountInputFormatter.double(amount: amount),
@@ -183,8 +182,7 @@ private extension CurrencyConverterViewModel {
                     guard let self else {
                         return
                     }
-                    self.sellCurrencyModel.threeDotsModel.isLoading = false
-                    self.buyCurrencyModel.threeDotsModel.isLoading = false
+                    self.stopLoadingAnimation()
                     switch result {
                     case let .success(money):
                         if self.isSellCurrencyViewSelected {
@@ -219,5 +217,15 @@ private extension CurrencyConverterViewModel {
 
     func resetNumbersPadModel() {
         numbersPadModel.text = ""
+    }
+}
+
+private extension CurrencyConverterViewModel {
+    func startLoadingAnimation() {
+        tradeCurrencyPairModel.isLoading = true
+    }
+
+    func stopLoadingAnimation() {
+        tradeCurrencyPairModel.isLoading = false
     }
 }
