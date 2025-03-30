@@ -30,5 +30,10 @@ extension CurrencyHeaderTitle {
             self.header = header
             self.title = currencyCode.rawValue
         }
+
+        func update(currency: CurrencyCode) {
+            currencyFlagImageViewModel.update(currencyCode: currency)
+            title = currency.rawValue
+        }
     }
 }
