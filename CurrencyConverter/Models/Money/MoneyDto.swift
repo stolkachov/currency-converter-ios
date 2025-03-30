@@ -7,14 +7,12 @@
 
 struct MoneyDto: Codable {
     let amount: String
-    let currency: String
 }
 
 extension MoneyDto {
     func toDomain() -> Money {
         Money(
-            amount: amount,
-            currency: currency
+            amount: amount
         )
     }
 }

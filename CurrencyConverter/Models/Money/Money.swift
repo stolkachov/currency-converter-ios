@@ -7,5 +7,4 @@
 
 struct Money: Equatable {
     let amount: String
-    let currency: String
 }

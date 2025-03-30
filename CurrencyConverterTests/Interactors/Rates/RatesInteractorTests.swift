@@ -68,7 +68,7 @@ final class RatesInteractorTests: XCTestCase {
     }
 
     func test_startRateUpdate_fetchRate_completion_success() {
-        let expectedMoney = Money(amount: "100", currency: "USD")
+        let expectedMoney = Money(amount: "100")
         let timer = AnyCancellable(cancel: {})
         timerScheduler.scheduleBlock = timer
         timerScheduler.scheduleReturnValue = timer

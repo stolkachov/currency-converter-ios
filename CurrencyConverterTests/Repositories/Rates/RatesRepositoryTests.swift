@@ -41,7 +41,7 @@ final class RatesRepositoryTests: XCTestCase {
     }
 
     func test_fetchRate_success() {
-        let moneyDto = MoneyDto(amount: "100", currency: "USD")
+        let moneyDto = MoneyDto(amount: "100")
         apiService.fetchRateCompletion = .success(moneyDto)
 
         let expectation = self.expectation(description: "fetchRateCompletion")
