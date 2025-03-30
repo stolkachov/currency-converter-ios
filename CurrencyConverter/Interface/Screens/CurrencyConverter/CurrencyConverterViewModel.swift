@@ -149,17 +149,6 @@ private extension CurrencyConverterViewModel {
         numbersPadModel.onTextDidChange = { [weak self] text in
             self?.startRateUpdate(amount: text)
         }
-        numbersPadModel.shouldAppendDigit = { text in
-            if text.contains(decimalSeparator) {
-                let decimals = text.components(separatedBy: decimalSeparator).last
-                return decimals?.count != 2
-            } else {
-                return text.count != 9
-            }
-        }
-        numbersPadModel.shouldAppendDecimalSeparator = { text in
-            return !text.contains(decimalSeparator)
-        }
     }
 }
 

@@ -10,6 +10,11 @@ import UIKit
 
 extension NumbersPad {
     final class Model {
+        struct Configuration {
+            let maxIntegerDigits: Int = 9
+            let maxFractionDigits: Int = 2
+        }
+
         enum Button {
             case text(text: String, action: () -> Void)
             case image(image: UIImage?, action: () -> Void)
@@ -26,9 +31,6 @@ extension NumbersPad {
 
         var onTextDidChange: ((String) -> Void)?
 
-        var shouldAppendDecimalSeparator: (String) -> Bool = { _ in true }
-        var shouldAppendDigit: (String) -> Bool = { _ in true }
-
         var text: String = "" {
             didSet {
                 if text != oldValue {
@@ -37,10 +39,14 @@ extension NumbersPad {
             }
         }
 
-        private(set) var buttons: [[Button]] = []
+        private(set) lazy var buttons: [[Button]] = makeButtons()
 
-        init() {
-            self.buttons = makeButtons()
+        private let configuration: Configuration
+
+        init(
+            configuration: Configuration = Configuration()
+        ) {
+            self.configuration = configuration
         }
     }
 }
@@ -64,13 +70,10 @@ private extension NumbersPad.Model {
         Button.text(
             text: digit,
             action: { [weak self] in
-                guard let self else {
+                guard self?.shouldAppendDigit() == true else {
                     return
                 }
-                guard self.shouldAppendDigit(self.text) else {
-                    return
-                }
-                self.text.append(digit)
+                self?.text.append(digit)
             }
         )
     }
@@ -79,13 +82,10 @@ private extension NumbersPad.Model {
         Button.text(
             text: decimalSeparator,
             action: { [weak self] in
-                guard let self else {
+                guard self?.shouldAppendDecimalSeparator() == true else {
                     return
                 }
-                guard self.shouldAppendDecimalSeparator(self.text) else {
-                    return
-                }
-                self.text.append(decimalSeparator)
+                self?.text.append(decimalSeparator)
             }
         )
     }
@@ -100,5 +100,20 @@ private extension NumbersPad.Model {
                 self.text = String(self.text.dropLast())
             }
         )
+    }
+}
+
+private extension NumbersPad.Model {
+    func shouldAppendDigit() -> Bool {
+        if text.contains(decimalSeparator) {
+            let decimals = text.components(separatedBy: decimalSeparator).last
+            return decimals?.count != configuration.maxFractionDigits
+        } else {
+            return text.count != configuration.maxIntegerDigits
+        }
+    }
+
+    func shouldAppendDecimalSeparator() -> Bool {
+        !text.contains(decimalSeparator)
     }
 }
