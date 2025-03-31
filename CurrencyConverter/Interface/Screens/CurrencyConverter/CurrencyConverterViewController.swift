@@ -20,6 +20,12 @@ final class CurrencyConverterViewController: UIViewController {
         return view
     }()
 
+    private lazy var gradientLayer: CAGradientLayer = {
+        let layer = CAGradientLayer()
+        layer.colors = [UIColor.backgroundShallow.cgColor, UIColor.backgroundDeep.cgColor]
+        return layer
+    }()
+
     private let viewModel: CurrencyConverterViewModel
 
     init(viewModel: CurrencyConverterViewModel) {
@@ -38,6 +44,11 @@ final class CurrencyConverterViewController: UIViewController {
         setupConstraints()
         bindViewModel()
         viewModel.onViewDidLoad()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        gradientLayer.frame = view.bounds
     }
 }
 
@@ -60,13 +71,9 @@ private extension CurrencyConverterViewController {
     func setupSubviews() {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
 
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = view.bounds
-        gradientLayer.colors = [UIColor.backgroundShallow.cgColor, UIColor.backgroundDeep.cgColor]
-        view.layer.insertSublayer(gradientLayer, at: 0)
-
         view.addSubview(tradeCurrencyPairView)
         view.addSubview(numbersPad)
+        view.layer.insertSublayer(gradientLayer, at: 0)
     }
 
     func setupConstraints() {
